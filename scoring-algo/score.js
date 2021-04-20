@@ -2,6 +2,11 @@ const data = require("./dummy-data");
 let players = data.players;
 let teams = data.teams;
 
+// Algorithm for scoring spades round
+// 1. Calculate new total score for each player
+// 2. Calculate new stats for both teams
+// 3. Reset the round stats for each player
+
 const calcPlayerScore = (player) => {
   let subTotal = player.booksThisRound * 10;
 
@@ -20,15 +25,9 @@ const calcPlayerScore = (player) => {
 const getUpdatedTeam = (team, players) => {
   const teamPlayers = players.filter((player) => player.teamId === team.teamId);
 
-  const newCombinedBid = teamPlayers.reduce(
-    (bids, player) => bids + player.bidThisRound,
-    0
-  );
+  const newCombinedBid = teamPlayers.reduce( (bids, player) => bids + player.bidThisRound, 0);
 
-  const newScore = teamPlayers.reduce(
-    (score, player) => score + player.scoreLastRound,
-    0
-  );
+  const newScore = teamPlayers.reduce( (score, player) => score + player.scoreLastRound, 0);
 
   return {
     teamId: team.teamId,
